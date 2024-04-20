@@ -27,6 +27,7 @@ OBJS = \
 	uart.o\
 	vectors.o\
 	vm.o\
+	rand.o\
 	$(NULL)
 #LOTTERY: you'll add the rand.o file in here
 
@@ -83,8 +84,8 @@ DEFINES =
 DEFINES += -DGETPPID
 DEFINES += -DCPS
 DEFINES += -DBETTER_LS
-#DEFINES += -DPROC_TIMES
-#DEFINES += -DLOTTERY
+DEFINES += -DPROC_TIMES
+DEFINES += -DLOTTERY
 CFLAGS = $(DEFINES) -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer -Wno-stringop-overflow
 CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
 ASFLAGS = $(DEFINES) -m32 -gdwarf-2 -Wa,-divide
@@ -152,7 +153,7 @@ tags: $(OBJS) entryother.S _init
 vectors.S: vectors.pl
 	./vectors.pl > vectors.S
 
-ULIB = ulib.o usys.o printf.o umalloc.o
+ULIB = ulib.o usys.o printf.o umalloc.o rand.o
 
 _%: %.o $(ULIB)
 	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o $@ $^
@@ -193,6 +194,11 @@ UPROGS=\
 	_sizeof\
 	_getppidtest\
 	_ps\
+	_random\
+	_mult\
+	_renice\
+	_nice\
+	_mfork\
 	$(NULL)
 #LOTTERY - you'll add some new programs into here
 #  mult, mfork, nice, renice, random
