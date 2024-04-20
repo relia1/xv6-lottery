@@ -1,3 +1,6 @@
+#ifndef MULT_C
+#define MULT_C
+
 #include "types.h"
 #include "stat.h"
 #include "user.h"
@@ -5,6 +8,13 @@
 
 // The single real purpose for mult is to have a compute
 // intensive program that runs for a long time.
+#ifndef MAXINT
+#define MAXINT 2147483//647
+#endif
+
+#ifndef MAXSHORT
+#define MAXSHORT 32767
+#endif
 
 int
 main(int argc, char *argv[])
@@ -36,3 +46,5 @@ main(int argc, char *argv[])
     // in xv6, exit() does not take a parameter.
     exit();
 }
+
+#endif // MULT_C
