@@ -75,7 +75,7 @@ struct stat;
 struct rtcdate;
 
 #ifdef PROC_TIMES
-# error this would be a good place to #include rand.h
+#include "rand.h"
 #endif // PROC_TIMES
 
 // system calls
@@ -109,9 +109,9 @@ char* strchr(const char*, char c);
 int strcmp(const char*, const char*);
 void printf(int, const char*, ...);
 char* gets(char*, int max);
-uint strlen(const char*);
-void* memset(void*, int, uint);
-void* malloc(uint);
+unsigned int strlen(const char*);
+void* memset(void*, int, unsigned int);
+void* malloc(unsigned int);
 void free(void*);
 int atoi(const char*);
 
@@ -124,7 +124,7 @@ int cps(void);
 #endif // CPS
 
 # ifdef LOTTERY
-#  error the user side function for renice will be here
+int renice(uint, int);
 # endif // LOTTERY
 
 #endif // __USER_H

@@ -1,3 +1,6 @@
+#ifndef SYSPROC_C
+#define SYSPROC_C
+
 #include "types.h"
 #include "x86.h"
 #include "defs.h"
@@ -91,24 +94,25 @@ sys_sleep(void)
 }
 
 #ifdef PROC_TIMES
-# error I implemented a function here called suptime (because it
-# error makes me think of supper time).
-# error It does all the things of sys_uptime() below. I then have
-# error sys_uptime() just call suptime().
-# error I can also call suptime() from other places in the kernel code.
 #endif // PROC_TIMES
+
+int
+suptime(void)
+{  
+   uint xticks;
+
+   acquire(&tickslock);
+   xticks = ticks;
+   release(&tickslock);
+   return xticks;
+}
 
 // return how many clock tick interrupts have occurred
 // since start.
 int
 sys_uptime(void)
 {
-  uint xticks;
-
-  acquire(&tickslock);
-  xticks = ticks;
-  release(&tickslock);
-  return xticks;
+    return suptime();
 }
 
 #ifdef CPS
@@ -121,9 +125,13 @@ sys_cps(void)
 #endif // CPS
 
 #ifdef LOTTERY
-# error This is where the sys_renice function should live.
-# error Put its full implementation in proc.c. I have a
-# error function called renice() in proc.c that is called
-# error by sys_renice(). The location can be found by looking
-# error one of the many LOTTERY blocks.
+int sys_renice(void)
+{
+    int nice_value;
+    int pid;
+    argint(0, &nice_value);
+    argint(1, &pid);
+    return renice(nice_value, pid);
+}
 #endif // LOTTERY
+#endif // SYSPROC_C

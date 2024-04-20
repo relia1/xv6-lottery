@@ -129,7 +129,7 @@ void            yield(void);
 int             proc_cps(void);
 #endif // CPS
 #ifdef LOTTERY
-# error you will need to have a new function in here for renice
+int             renice(uint nice_value, int pid);
 #endif // LOTTERY
 
 // swtch.S

@@ -1,3 +1,6 @@
+#ifndef SYSCALL_C
+#define SYSCALL_C
+
 #include "types.h"
 #include "defs.h"
 #include "param.h"
@@ -110,7 +113,8 @@ extern int sys_getppid(void);
 extern int sys_cps(void);
 #endif // CPS
 #ifdef LOTTERY
-# error extern the kernel calls in here
+//extern int sys_suptime(void);
+extern int sys_renice(void);
 #endif // LOTTERY
 
 static int (*syscalls[])(void) = {
@@ -142,7 +146,8 @@ static int (*syscalls[])(void) = {
 [SYS_cps]     sys_cps,
 #endif // CPS
 #ifdef LOTTERY
-# error new array entries for the system calls
+//[SYS_suptime] sys_suptime,
+[SYS_renice] sys_renice,
 #endif // LOTTERY
 };
 
@@ -161,3 +166,5 @@ syscall(void)
     curproc->tf->eax = -1;
   }
 }
+
+#endif // SYSCALL_C

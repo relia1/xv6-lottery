@@ -32,7 +32,7 @@
 # define SYS_cps    23
 #endif // CPS
 #ifdef LOTTERY
-# error new system call numbers - like SYS_renice
+#define SYS_renice 24
 #endif // LOTTERY
 
 #endif // __SYSCALL_H

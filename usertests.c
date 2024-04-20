@@ -1738,8 +1738,6 @@ void argptest()
 }
 
 #ifdef PROC_TIMES
-# error since you will have your own implementation of rand
-# error this one needs to be #ifdef-ed out.
 #else // PROC_TIMES
 unsigned long randstate = 1;
 unsigned int

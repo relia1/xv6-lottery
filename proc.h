@@ -1,14 +1,15 @@
-#ifdef PROC_TIMES
-# error Remember to put multi-include protection in here.
-#endif // PROC_TIMES
+#ifndef PROC_H
+#define PROC_H
 
 #ifdef PROC_TIMES
-# error You will need a couple additional include files.
+#include "date.h"
 #endif // PROC_TIMES
 
 #ifdef LOTTERY
-# error Some new defines go in here. Things like default, min, and
-# error max nice values.
+# define DEFAULT_NICE_VALUE 20
+# define MAX_NICE_VALUE 100
+# define MIN_NICE_VALUE 1
+uint sum_runnable_nice_vals();
 #endif // LOTTERY
 
 // Per-CPU state
@@ -63,11 +64,14 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
 #ifdef PROC_TIMES
-# error some new structure members go in here
+  struct rtcdate begin_date;
+  uint ticks_total;
+  uint ticks_begin;
+  uint sched_times;
 #endif // PROC_TIMES
 # ifdef LOTTERY
-#  error something nice should go in here
-# endif // LOTTERY
+  uint nice_value;
+#endif
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -77,5 +81,5 @@ struct proc {
 //   expandable heap
 
 #ifdef PROC_TIMES
-# error close the multi-include protection here
 #endif // PROC_TIMES
+#endif // PROC_H
