@@ -7,7 +7,7 @@
 
 #ifdef LOTTERY
 # define DEFAULT_NICE_VALUE 20
-# define MAX_NICE_VALUE 100
+# define MAX_NICE_VALUE 50
 # define MIN_NICE_VALUE 1
 uint sum_runnable_nice_vals();
 #endif // LOTTERY

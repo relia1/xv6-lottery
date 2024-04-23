@@ -1,6 +1,5 @@
 #ifndef MFORK_C
 #define MFORK_C
-
 #include "types.h"
 #include "stat.h"
 #include "user.h"
@@ -34,5 +33,4 @@ main(int argc, char *argv[])
     // in xv6, exit() does not take a parameter.
     exit();
 }
-
 #endif // MFORK_C
